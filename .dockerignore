@@ -1,0 +1,7 @@
+*.pyc
+__pycache__/
+.env
+bot_data.json
+.git/
+.vscode/
+*.swp

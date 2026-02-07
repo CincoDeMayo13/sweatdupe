@@ -1,0 +1,12 @@
+{
+  "users": {
+    "650908312": {
+      "name": "Geoffrey",
+      "weekly_goal": 3,
+      "workouts_this_week": 0
+    }
+  },
+  "stakes": "loser buys dinner",
+  "week_start": "2026-02-02T00:00:00",
+  "needs_week_notification": false
+}
