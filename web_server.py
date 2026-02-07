@@ -2,6 +2,7 @@
 Web server wrapper for Render.com free tier deployment
 Keeps the bot alive by exposing a health check endpoint
 """
+import asyncio
 from flask import Flask
 from threading import Thread
 from bot import SweatDupeBot
@@ -17,14 +18,22 @@ def health():
     return "OK", 200
 
 def run_bot():
-    """Run the Telegram bot in a separate thread"""
+    """Run the Telegram bot in a separate thread with its own event loop"""
     try:
+        # Create new event loop for this thread
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        
         bot = SweatDupeBot()
         bot.run()
     except ValueError as e:
         print(f"⚠️  Configuration Error: {e}")
+    except KeyboardInterrupt:
+        print("\n👋 Bot stopped by user")
     except Exception as e:
         print(f"❌ Error: {e}")
+        import traceback
+        traceback.print_exc()
 
 if __name__ == "__main__":
     # Start bot in background thread
